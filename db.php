@@ -1,7 +1,7 @@
 <?php
 
 try{
-    $db = new PDO('mysql:host=localhost; dbname=course' , 'root');
+    $db = new PDO('mysql:host=localhost; dbname=apollo' , 'root');
 
 }catch (Exception $e){
     die($e->getMessage());
