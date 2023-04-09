@@ -11,9 +11,20 @@ $querySection2 = $db->prepare('select * from section_2 limit 1');
 $querySection2->execute();
 $section2 = $querySection2->fetch();
 
+
+$sliderQuery = $db->prepare('select * from slider');
+$sliderQuery->execute();
+$sliders = $sliderQuery->fetchAll(PDO::FETCH_ASSOC);
+
+
+
 $querySection4 = $db->prepare('select * from section_4 limit 1');
 $querySection4->execute();
 $section4 = $querySection4->fetch();
+
+$query = $db->prepare("Select * from contact limit 1");
+$query->execute();
+$contact = $query->fetch();
 
 ?>
 
@@ -66,9 +77,19 @@ $section4 = $querySection4->fetch();
 </g>
 </svg>
     <ul class="banner">
-        <li class="active"></li>
-        <li></li>
-        <li></li>
+       <?php
+       foreach ($sliders as $index => $slider){
+
+           if ($slider['type'] == 1){
+               continue;
+           }
+           ?>
+
+           <li class="active"><img style="object-fit: contain" src="<?php echo getImage($slider['image']);?>"></li>
+
+        <?php
+       }
+       ?>
     </ul><i class="icon-chevron-thin-left prev"></i><i class="icon-chevron-thin-right next"></i>
 </section>
 <section id="featured"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 248.8" style="enable-background:new 0 0 100 248.8;" xml:space="preserve">
@@ -91,10 +112,22 @@ $section4 = $querySection4->fetch();
 </svg>
     <div class="wrapper">
         <ul class="slider">
-            <li class="back"><img src="assets/img/three-slide/thumb-1.jpg"></li>
-            <li class="current"><img src="assets/img/three-slide/thumb-2.jpg"></li>
-            <li class="front"><img src="assets/img/three-slide/thumb-3.jpg"></li>
-            <li><img src="assets/img/three-slide/thumb-4.jpg"></li>
+            <?php
+            foreach ($sliders as $index => $slider){
+
+                if ($slider['type'] == 2){
+                    continue;
+                }
+                ?>
+                <li class="current"><img src="<?php echo getImage($slider['image']);?>"></li>
+                <li class="back"><img src="<?php echo getImage($slider['image']);?>"></li>
+                <li class="front"><img src="<?php echo getImage($slider['image']);?>"></li>
+
+
+
+                <?php
+            }
+            ?>
         </ul>
     </div><i class="icon-chevron-thin-left prev"></i><i class="icon-chevron-thin-right next"></i>
 </section>
@@ -105,8 +138,8 @@ $section4 = $querySection4->fetch();
 </svg>
     <div class="wrapper">
         <div class="blurb">
-            <h2><strong>Say</strong> Hello</h2>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+            <h2><?php echo $contact['title'];?></h2>
+            <p><?php echo $contact['text'];?></p>
         </div>
         <form>
             <input type="email" placeholder="Your Email">
