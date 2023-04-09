@@ -1,9 +1,19 @@
 <?php
 require_once './db.php';
+require_once './admin/functions/helper.php';
 
-$query = $db->prepare('select * from section_1 limit 1');
-$query->execute();
-$section1 = $query->fetch();
+$querySection1 = $db->prepare('select * from section_1 limit 1');
+$querySection1->execute();
+$section1 = $querySection1->fetch();
+
+
+$querySection2 = $db->prepare('select * from section_2 limit 1');
+$querySection2->execute();
+$section2 = $querySection2->fetch();
+
+$querySection4 = $db->prepare('select * from section_4 limit 1');
+$querySection4->execute();
+$section4 = $querySection4->fetch();
 
 ?>
 
@@ -44,9 +54,9 @@ $section1 = $query->fetch();
     <div class="wrapper">
         <div class="camera"><img src="assets/img/camera.png" alt="Camera"></div>
         <div class="blurb">
-            <h2>My name is <strong>Apollo</strong></h2>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.<br><br>Ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-            <div class="social"><a href="#"><i class="icon-facebook"></i></a><a href="#"><i class="icon-instagram"></i></a><a href="#"><i class="icon-twitter"></i></a><a href="#"><i class="icon-pinterest-p"></i></a></div>
+            <h2><?= $section2['title']; ?></h2>
+            <p><?= $section2['text']; ?></p>
+            <div class="social"><a href="<?= $section2['facebook']; ?>"><i class="icon-facebook"></i></a><a href="<?= $section2['instagram']; ?>"><i class="icon-instagram"></i></a><a href="<?= $section2['twitter']; ?>"><i class="icon-twitter"></i></a><a href="<?= $section2['pinterest']; ?>"><i class="icon-pinterest-p"></i></a></div>
         </div>
     </div>
 </section>
@@ -68,10 +78,10 @@ $section1 = $query->fetch();
 </svg>
     <div class="wrapper">
         <div class="blurb">
-            <h2><strong>Ut enim</strong> ad minim</h2>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
+            <h2><?= $section4['title']; ?></h2>
+            <p><?= $section4['text']; ?> </p>
         </div>
-        <div class="featured"><img src="assets/img/featured.jpg" alt="Featured"></div>
+        <div class="featured"><img src="<?php echo getImage($section4['image']);?>" alt="Featured"></div>
     </div>
 </section>
 <section id="three-slide"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 248.8" style="enable-background:new 0 0 100 248.8;" xml:space="preserve">
@@ -107,6 +117,8 @@ $section1 = $query->fetch();
     </div>
     <p class="copyright">&copy; Apollo 2016</p>
 </section>
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-2.2.4.min.js"><\/script>')</script>
 <script src="assets/js/functions-min.js"></script>

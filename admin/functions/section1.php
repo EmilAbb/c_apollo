@@ -1,5 +1,9 @@
 <?php
 
+
+
+
+
 require_once "../../db.php";
 require_once "helper.php";
 if ($_SERVER['REQUEST_METHOD'] !== 'POST'){
@@ -8,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST'){
 }
 
 if (isset($_POST['title']) && isset($_POST['text']) && !empty($_POST['title']) && !empty($_POST['text'])){
-    $title = $_POST['title'];
-    $text = $_POST['text'];
+    $title = htmlentities($_POST['title']);
+    $text = htmlentities($_POST['text']);
 
     $section1 = getFirstSection($db);
     if ($section1){
