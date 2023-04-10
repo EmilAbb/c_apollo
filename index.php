@@ -141,10 +141,11 @@ $contact = $query->fetch();
             <h2><?php echo $contact['title'];?></h2>
             <p><?php echo $contact['text'];?></p>
         </div>
-        <form>
-            <input type="email" placeholder="Your Email">
-            <input type="text" placeholder="Subject">
-            <textarea placeholder="Message"></textarea>
+        <form action="admin/functions/users.php" method="post">
+            <input type="email" placeholder="Your Email" name="email">
+            <input type="text" placeholder="Subject" name="subject">
+            <textarea placeholder="Message" name="message"></textarea>
+            <input type="hidden" class="form-control my-2" name="action" value="insert">
             <input type="submit" value="Send Message">
         </form>
     </div>
